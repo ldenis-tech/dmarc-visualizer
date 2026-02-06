@@ -3,5 +3,5 @@
 # Uncomment this line f you would like the results of the update emailed to you.
 # MAILTO=your@email.com
 
-36 17 * * 6,3 /usr/local/bin/geoipupdate
+30 6 * * * root /usr/local/bin/geoip-update-dbs
 # end of crontab

@@ -25,6 +25,8 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
+    environment:
+      - BASE_GEOIP_DBS_URL=https://geoipdbs.lan
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.18.0
@@ -38,7 +40,7 @@ services:
         hard: -1
     restart: always
     healthcheck:
-      test: [ "CMD", "curl","-s" ,"-f", "http://localhost:9200/_cat/health" ]
+      test: ["CMD", "curl", "-s", "-f", "http://localhost:9200/_cat/health"]
       interval: 1m
       timeout: 10s
       retries: 3
@@ -69,17 +71,17 @@ services:
       GF_LOG_LEVEL: debug
       # GF_SERVER_ROOT_URL: ''
 
-      GF_SECURITY_ADMIN_USER: 'admin'
-      GF_SECURITY_ADMIN_PASSWORD: 'admin1'
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "admin1"
       # GF_SECURITY_ADMIN_EMAIL: ''
-      GF_SECURITY_DISABLE_GRAVATAR: 'true'
+      GF_SECURITY_DISABLE_GRAVATAR: "true"
       # GF_SECURITY_COOKIE_SECURE: 'true'
-      GF_SECURITY_ANGULAR_SUPPORT_ENABLED: 'false'
+      GF_SECURITY_ANGULAR_SUPPORT_ENABLED: "false"
 
       GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/var/lib/grafana/dashboards/Grafana-DMARC_Reports.json"
 
-      GF_AUTH_ANONYMOUS_ENABLED: 'false'
-      GF_AUTH_BASIC: 'true'
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_AUTH_BASIC: "true"
 
       # GF_AUTH_AZUREAD_AUTO_LOGIN: 'false'
       # GF_AUTH_AZUREAD_ENABLED: 'false'
@@ -92,15 +94,15 @@ services:
       # GF_AUTH_AZUREAD_ROLE_ATTRIBUTE_STRICT: 'false'
       # GF_AUTH_AZUREAD_ALLOW_ASSIGN_GRAFANA_ADMIN: 'false'
 
-      GF_UNIFIED_ALERTING_ENABLED: 'false'
+      GF_UNIFIED_ALERTING_ENABLED: "false"
 
-      GF_ALERTING_ENABLED: 'false'
+      GF_ALERTING_ENABLED: "false"
 
-      GF_EXPLORE_ENABLED: 'false'
+      GF_EXPLORE_ENABLED: "false"
 
-      GF_DATE_FORMATS_USE_BROWSER_LOCALE: 'true'
-      GF_DATE_FORMATS_DEFAULT_TIMEZONE: 'browser'
-      GF_DATE_FORMATS_DEFAULT_WEEK_START: 'monday'
+      GF_DATE_FORMATS_USE_BROWSER_LOCALE: "true"
+      GF_DATE_FORMATS_DEFAULT_TIMEZONE: "browser"
+      GF_DATE_FORMATS_DEFAULT_WEEK_START: "monday"
     restart: always
     depends_on:
       elasticsearch:

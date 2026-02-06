@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Update GeoIP databases
+
+global_ret=0
+
+tmp_file="$(mktemp)"
+if curl -sk "${BASE_GEOIP_DBS_URL}/GeoLite2-Country.mmdb" -o "$tmp_file"; then
+    mkdir -p /usr/share/GeoIP
+    rm -f "/usr/share/GeoIP/GeoLite2-Country.mmdb"
+    mv "$tmp_file" "/usr/share/GeoIP/GeoLite2-Country.mmdb"
+    chown -R root:root /usr/share/GeoIP
+    chmod 755 /usr/share/GeoIP
+    chmod 644 "/usr/share/GeoIP/GeoLite2-Country.mmdb"
+else
+    global_ret=1
+    rm -f "$tmp_file"
+fi
+
+tmp_file="$(mktemp)"
+if curl -sk "${BASE_GEOIP_DBS_URL}/GeoLite2-City.mmdb" -o "$tmp_file"; then
+    mkdir -p /usr/share/GeoIP
+    rm -f "/usr/share/GeoIP/GeoLite2-City.mmdb"
+    mv "$tmp_file" "/usr/share/GeoIP/GeoLite2-City.mmdb"
+    chown -R root:root /usr/share/GeoIP
+    chmod 755 /usr/share/GeoIP
+    chmod 644 "/usr/share/GeoIP/GeoLite2-City.mmdb"
+else
+    global_ret=1
+    rm -f "$tmp_file"
+fi
+
+tmp_file="$(mktemp)"
+if curl -sk "${BASE_GEOIP_DBS_URL}/GeoLite2-ASN.mmdb" -o "$tmp_file"; then
+    mkdir -p /usr/share/GeoIP
+    rm -f "/usr/share/GeoIP/GeoLite2-ASN.mmdb"
+    mv "$tmp_file" "/usr/share/GeoIP/GeoLite2-ASN.mmdb"
+    chown -R root:root /usr/share/GeoIP
+    chmod 755 /usr/share/GeoIP
+    chmod 644 "/usr/share/GeoIP/GeoLite2-ASN.mmdb"
+else
+    global_ret=1
+    rm -f "$tmp_file"
+fi
+
+return $global_ret

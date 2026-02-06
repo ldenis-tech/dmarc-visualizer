@@ -9,13 +9,8 @@ COPY sample_reports/ /input/
 COPY parsedmarc.ini /
 
 ## Set up geoipudate for automatic updates
-# RUN wget https://github.com/maxmind/geoipupdate/releases/download/v6.0.0/geoipupdate_6.0.0_linux_amd64.tar.gz -O /tmp/geoipupdate.tar.gz
-# RUN tar -zxf /tmp/geoipupdate.tar.gz --directory /tmp
-# RUN cp /tmp/geoipupdate_6.0.0_linux_amd64/geoipupdate /usr/local/bin/
-# COPY GeoIP.conf /usr/local/etc/
-# RUN geoipupdate
-# RUN rm -rf /tmp/geoipupdate_6.0.0_linux_amd64/
-# RUN rm /tmp/geoipupdate.tar.gz
-
-# COPY geoip_update_cron /etc/cron.d/
-# RUN chmod 644 /etc/cron.d/geoip_update_cron
+COPY geoip-update-dbs /usr/local/bin/
+RUN chmod 755 /usr/local/bin/geoip-update-dbs
+RUN geoip-update-dbs
+COPY geoip_update_cron /etc/cron.d/
+RUN chmod 644 /etc/cron.d/geoip_update_cron
