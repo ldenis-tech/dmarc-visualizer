@@ -2,6 +2,8 @@
 
 # Update GeoIP databases
 
+BASE_GEOIP_DBS_URL=https://geoipdbs.lan
+
 global_ret=0
 
 tmp_file="$(mktemp)"
