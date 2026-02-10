@@ -2,14 +2,14 @@
 
 # Update GeoIP database
 
-BASE_GEOIP_DBS_URL=
+GEOIP_DB_URL=
 
-if [ -z "$BASE_GEOIP_DBS_URL" ]; then
+if [ -z "$GEOIP_DB_URL" ]; then
     exit 0
 fi
 
 tmp_file="$(mktemp)"
-if curl -sk "${BASE_GEOIP_DBS_URL}/GeoLite2-Country.mmdb" -o "$tmp_file"; then
+if curl -sk "$GEOIP_DB_URL" -o "$tmp_file"; then
     mkdir -p /usr/share/GeoIP
     rm -f "/usr/share/GeoIP/GeoLite2-Country.mmdb"
     mv "$tmp_file" "/usr/share/GeoIP/GeoLite2-Country.mmdb"

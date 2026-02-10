@@ -11,26 +11,13 @@ See the full blog post with the original instructions at [Debricked](https://deb
 ## Updates from original repository
 
 * parsedmarc
-  * Running from python 3.11
-  * Built in the geoip functions with cron running updates.
-  * Runs in verbose mode by default.
-  * Delayed start by waiting for Elasticsearch to report service healthy.
+  * Update GeoIP database from custom URL.
 
 * Grafana
-  * Updated to recent release version - 11.6.0 (Upgrades to 10.2.x are causing errors that are yet to be resolved - THIS IS NOT CONFIRMED IN 11.6.0 YET).
-  * Uses a docker volume for data persistence.
-  * Delayed start by waiting for Elasticsearch to report service healthy.
-  * grafana-piechart-panel plugin is deprecated so has been removed and panel converted to the new builtin Piechart.
-  * grafana-worldmap-panel plugin is deprecated so has been removed and panel converted to the new builtin Geomap.
-
-* Elasticsearch
-  * Updated to current release version - 8.18.0.
-  * Uses a docker volume for data persistence.
-  * Runs health check to report service healthy, forcing other containers to wait until initialised.
+  * Updated Docker file to preserve Geomap plugin.
 
 * Other
-  * Containers are networked with manual IP addressing.
-  * Added sample files for testing functionality without needing to connect to an actual mailbox.
+  * Removed manual IP addressing.
 
 ## KNOWN ISSUES
 
@@ -39,7 +26,7 @@ See the full blog post with the original instructions at [Debricked](https://deb
 ## Instructions
 
 ```shell
-git clone https://github.com/LukeCallaghan/dmarc-visualizer.git
+git clone https://github.com/ldenis-tech/dmarc-visualizer.git
 cd dmarc-visualizer
 docker-compose build
 docker-compose up -d
@@ -47,7 +34,7 @@ docker-compose up -d
 
 The containers will start and can take a while to get running.
 
-Visit `http://localhost:3000/` in your browser. Default username and password is admin. This can be edited and will persist.
+Visit `http://localhost:3000/` in your browser. Default username is admin and password is admin1. This can be edited and will persist.
 
 ## Configuration
 
@@ -63,9 +50,7 @@ For a full list of options and information about their use, please visit the [co
 
 #### Geo IP
 
-To enable Geo IP you will need to complete the requirements outlined in the [geoipupdate section of the parsedmarc documentation](https://domainaware.github.io/parsedmarc/installation.html#geoipupdate-setup)
-
-Once you have your license key file, you can update the GeoIP.conf file with your license details and remove the comments so the geoip functionality will work.
+To enable Geo IP you will need to fill variable GEOIP_DB_URL in geoip-update-dbs script and uncomment `ip_db_path` in parsedmarc.ini.
 
 ### Elasticseach
 
