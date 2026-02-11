@@ -1,4 +1,4 @@
 .DS_Store
-/files/
-/output_files/
-
+files/
+output_files/
+geoip-updates-dbs.conf

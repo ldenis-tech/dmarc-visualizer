@@ -2,7 +2,9 @@
 
 # Update GeoIP database
 
-GEOIP_DB_URL=
+if [ -f /etc/geoip-updates-dbs.conf ]; then
+    . /etc/geoip-updates-dbs.conf
+fi
 
 if [ -z "$GEOIP_DB_URL" ]; then
     exit 0
