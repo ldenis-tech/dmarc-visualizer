@@ -44,8 +44,6 @@ Configuration options are available for each of the services.
 
 parsedmarc can be configured in the parsedmarc.ini file. There are common options included in the file already.
 
-PARSEDMARC NOW RUNS IN OFFLINE MODE BY DEFAULT - THIS MUST BE COMMENTED IN THE CONFIG TO BE ONLINE.
-
 For a full list of options and information about their use, please visit the [config section of the parsedmarc documentation](https://domainaware.github.io/parsedmarc/usage.html#configuration-file)
 
 #### Geo IP
